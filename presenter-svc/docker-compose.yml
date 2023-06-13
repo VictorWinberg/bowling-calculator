@@ -1,0 +1,21 @@
+version: "3"
+services:
+  presenter-svc:
+    container_name: presenter-svc
+    build:
+      context: .
+      target: install
+    command: npm run dev
+    volumes:
+      - ./src:/app/src
+      - ./types:/app/types
+    environment:
+      NODE_ENV: development
+      PORT: 3000
+    ports:
+      - "8082:3000"
+
+networks:
+  default:
+    name: getaccept_default
+    external: true
