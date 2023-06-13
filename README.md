@@ -14,14 +14,6 @@ Bowling Score Calculator is built with:
 
 ### Setup
 
-### First time
-
-If you are running builds for the first time, you need to create the network defined in the docker-compose file. Run the following command:
-
-```bash
-docker network create getaccept_default
-```
-
 ### Running locally in development
 
 ```

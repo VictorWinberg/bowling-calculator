@@ -15,8 +15,23 @@ services:
       AWS_ENDPOINT_URL: http://localstack:4566
     ports:
       - "8083:3000"
+    networks:
+      - getaccept_default
+
+  localstack:
+    image: localstack/localstack
+    ports:
+      - "4566:4566"
+      - "4510-4559:4510-4559"
+    environment:
+      DOCKER_HOST: unix:///var/run/docker.sock
+    volumes:
+      - "~/tmp/localstack:/tmp/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    networks:
+      - getaccept_default
 
 networks:
-  default:
+  getaccept_default:
     name: getaccept_default
     external: true

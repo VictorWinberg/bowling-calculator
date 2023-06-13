@@ -12,10 +12,13 @@ services:
     environment:
       NODE_ENV: development
       PORT: 3000
+      AWS_ENDPOINT_URL: http://localstack:4566
     ports:
       - "8081:3000"
+    networks:
+      - getaccept_default
 
 networks:
-  default:
+  getaccept_default:
     name: getaccept_default
     external: true
