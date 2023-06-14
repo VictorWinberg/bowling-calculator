@@ -11,7 +11,7 @@ import {
 const AWS_URL = process.env.AWS_ENDPOINT_URL || "http://localhost:4566";
 
 class QueueService<T> {
-  private queueUrl: string = "";
+  private queueUrl?: string;
   private sqs: SQSClient;
 
   constructor(protected queueName: string) {
@@ -24,7 +24,7 @@ class QueueService<T> {
       },
     });
 
-    this.initQueue(this.queueName)
+    this.initQueue(this.queueName);
   }
 
   private async initQueue(queueName: string) {

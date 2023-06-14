@@ -4,8 +4,7 @@ import QueueService from "./queue-service";
 import { checkRolls } from "./utils";
 
 const app = express();
-const queueService = new QueueService();
-queueService.init();
+const queue = new QueueService("bowling-rolls");
 
 app.use(bodyParser.json());
 
@@ -16,7 +15,7 @@ app.post("/rolls", async (req: Request, res: Response) => {
     return res.status(400).send({ message: "invalid rolls" });
   }
 
-  const messageId = await queueService.queueRolls(rolls);
+  const messageId = await queue.sendMessage(rolls);
   return res.send({ messageId });
 });
 

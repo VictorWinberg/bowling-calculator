@@ -1,14 +1,14 @@
+import { Frame, Roll } from "../types";
 import BowlingCalculator from "./calculator";
-import QueueListener from "./queue-listener";
+import QueueService from "./queue-service";
 
-async function app() {
-  const calculator = new BowlingCalculator();
+const calculator = new BowlingCalculator();
+const queueRolls = new QueueService<Roll[]>("bowling-rolls");
+const queueFrames = new QueueService<Frame[]>("bowling-frames");
 
-  const queueListener = await new QueueListener().init();
-  await queueListener.listen((rolls) => {
-    const score = calculator.calculate(rolls)
-    console.log(`Score: ${score}`);
-  })
-}
-
-app();
+queueRolls.awaitQueue().then(() => {
+  queueRolls.listen((rolls) => {
+    const frames = calculator.calculate(rolls);
+    queueFrames.sendMessage(frames);
+  });
+});
