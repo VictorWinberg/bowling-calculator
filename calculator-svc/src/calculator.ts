@@ -1,8 +1,9 @@
-import { Roll } from "../types";
+import { Frame, Roll } from "../types";
 
 class BowlingCalculator {
-  calculate(rolls: Roll[]): number {
+  calculate(rolls: Roll[]): Frame[] {
     let totalScore = 0;
+    let frames = [];
 
     for (let frameIndex = 0; frameIndex <= rolls.length - 1; frameIndex++) {
       const roll1 = rolls[frameIndex].roll1;
@@ -27,9 +28,14 @@ class BowlingCalculator {
       else {
         totalScore += roll1 + roll2;
       }
+
+      frames.push({
+        roll: rolls[frameIndex],
+        score: totalScore,
+      });
     }
 
-    return totalScore;
+    return frames;
   }
 
   private getStrikeBonus(rolls: Roll[], frame: number): number {

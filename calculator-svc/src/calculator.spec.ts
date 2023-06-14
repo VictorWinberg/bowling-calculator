@@ -21,9 +21,9 @@ describe("BowlingCalculator", () => {
       { roll1: 6, roll2: 1 },
     ];
 
-    const score = calculator.calculate(rolls);
+    const lastFrame = calculator.calculate(rolls).pop();
 
-    expect(score).toBe(70);
+    expect(lastFrame?.score).toBe(70);
   });
 
   it("should calculate the score for a game with all strikes", () => {
@@ -40,17 +40,17 @@ describe("BowlingCalculator", () => {
       { roll1: 10, roll2: 10, roll3: 10 },
     ];
 
-    const score = calculator.calculate(rolls);
+    const lastFrame = calculator.calculate(rolls).pop();
 
-    expect(score).toBe(300);
+    expect(lastFrame?.score).toBe(300);
   });
 
   it("should calculate the score for a game with a strike spare 4|0", () => {
     const rolls = [{ roll1: 10 }, { roll1: 7, roll2: 3 }, { roll1: 4, roll2: 0 }];
 
-    const score = calculator.calculate(rolls);
+    const lastFrame = calculator.calculate(rolls).pop();
 
-    expect(score).toBe(38);
+    expect(lastFrame?.score).toBe(38);
   });
 
   it("should calculate the score for a game with a mix of strikes, spares, and open frames", () => {
@@ -67,8 +67,8 @@ describe("BowlingCalculator", () => {
       { roll1: 10, roll2: 10, roll3: 10 },
     ];
 
-    const score = calculator.calculate(rolls);
+    const lastFrame = calculator.calculate(rolls).pop();
 
-    expect(score).toBe(188);
+    expect(lastFrame?.score).toBe(188);
   });
 });
