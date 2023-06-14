@@ -1,4 +1,4 @@
-# GetAccept Bowling Score Calculator 
+# Bowling Score Calculator 
 
 ## Technologies
 
